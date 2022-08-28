@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 40%;
+  margin: auto;
+  background-color: white;
+  border: 1px solid black;
+  font-family: 'Bree Serif', serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 38px;
+}
+
+.main-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.price-circle {
+  height: 180px;
+  width: 180px;
+  border: 7px solid black;
+  border-radius: 50%;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-circle > p:nth-of-type(2){
+  font-size: 40px;
+}
+
+.currency-price{
+  display: flex;
+  gap: 20px;
+}
+
+.currency-price > p{
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor:copy;
+}
+
+@media(max-width: 798px){
+  body {
+    width: 90%;
+  }
+}
