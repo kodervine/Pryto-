@@ -8,16 +8,22 @@ fetch(bitCoinData)
 
 console.log(bitCoinData)
 
+// Currency conversion
 const access_key = 'VGNS7gpTo6o7errodHafToXucwtUhL6p';
-const from = 'GPB';
-const to = 'JPY';
+const from = 'USD';
+const to = 'NGN';
 const amount = 25;
-const url = `https://api.exchangeratesapi.io/latest?access_key=${ access_key }`;
 
-console.log(url)
+const myHeaders = new Headers();
+myHeaders.append("apikey", "VGNS7gpTo6o7errodHafToXucwtUhL6p");
 
-// const currencyAPIUrl = "https://api.exchangeratesapi.io/v1/latest?access_key=a4fJ9cVqmLvySyOu2QH63JVMThIe9Ydk"
+const requestOptions = {
+  method: 'GET',
+  redirect: 'follow',
+  headers: myHeaders
+};
 
-
-// fetch("https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}", requestOptions)
-//   .then(response => response.text())
+fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
