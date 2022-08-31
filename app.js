@@ -23,7 +23,15 @@ const requestOptions = {
   headers: myHeaders
 };
 
+let fetchedData = {};
+
 fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`, requestOptions)
   .then(response => response.text())
-  .then(result => console.log(result))
+  .then(result => console.log(fetchedData = result))
   .catch(error => console.log('error', error));
+
+//  console.log(fetchedData)
+
+ setTimeout(()=>{
+  console.log(fetchedData)
+ }, 6000)
