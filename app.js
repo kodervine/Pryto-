@@ -8,7 +8,7 @@ fetch(bitCoinData)
 
 console.log(bitCoinData)
 
-// Currency conversion
+// Currency conversion from exchangeAPI
 const access_key = 'VGNS7gpTo6o7errodHafToXucwtUhL6p';
 const from = 'USD';
 const to = 'NGN';
@@ -23,6 +23,7 @@ const requestOptions = {
   headers: myHeaders
 };
 
+// Variable to append fetched conversion data to
 let fetchedData = {};
 
 fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`, requestOptions)
@@ -30,8 +31,14 @@ fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}
   .then(result => console.log(fetchedData = result))
   .catch(error => console.log('error', error));
 
-//  console.log(fetchedData)
-
+  // To delay until the fetch request has been made and convert to JS object : Display on screen
  setTimeout(()=>{
-  console.log(fetchedData)
- }, 6000)
+  const convertData = JSON.parse(fetchedData)
+
+  const nairaId = document.getElementById('naira-id');
+  const usdId = document.getElementById('usd-id');
+
+  const roundOffNairaDecimal = Math.round(convertData.result)
+  nairaId.innerText = `Naira: ${roundOffNairaDecimal}`
+  usdId.innerText = `USD: $${amount}`
+ }, 3000)
