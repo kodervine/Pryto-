@@ -1,12 +1,24 @@
-const bitCoinData = "https://api.cryptonator.com/api/ticker/btc-usd";
+// const bitCoinData = "https://api.cryptonator.com/api/ticker/btc-usd";
+const bitCoinData = "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1";
+
+let fetchedCryptoRequest;
 
 fetch(bitCoinData)
-  .then(res => res.json())
-  .then(data => console.log(data))
+  .then(response => response.json())
+  .then(data => fetchedCryptoRequest = data)
 
-// const parsedData = JSON.parse(bitCoinData)
+setTimeout(()=>{
+  const accessCryptoAPIData = fetchedCryptoRequest[0].price
+
+  const roundOffCrptoData = Math.round(accessCryptoAPIData)
+
+  const bitCoinPrice = document.getElementById('bitcoin-price')
+  bitCoinPrice.innerText = roundOffCrptoData
+ }, 5000)
 
 console.log(bitCoinData)
+
+// Convert from btc to currency
 
 // Currency conversion from exchangeAPI
 const access_key = 'VGNS7gpTo6o7errodHafToXucwtUhL6p';
