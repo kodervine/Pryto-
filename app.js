@@ -2,24 +2,25 @@
 const bitCoinData = "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1";
 
 // Use async to fetch the bitcoin data
-async function getBitcoinFunction(){
-  const fetchData = await fetch(bitCoinData)
-  const data = await fetchData.json()
+setInterval(()=>{
+  async function getBitcoinFunction(){
+    const fetchData = await fetch(bitCoinData)
+    const data = await fetchData.json()
 
-  const accessCryptoAPIData = data[0].price
-  const roundOffCrptoData = Math.round(accessCryptoAPIData)
+    const accessCryptoAPIData = data[0].price
+    const roundOffCrptoData = Math.round(accessCryptoAPIData)
 
-  const bitCoinPrice = document.getElementById('bitcoin-price')
-  bitCoinPrice.innerText = roundOffCrptoData
+    const bitCoinPrice = document.getElementById('bitcoin-price')
+    bitCoinPrice.innerText = roundOffCrptoData
 
-  // Show time
-  let timeToday = new Date;
-  // const timeToday = data[0].price_date;
-  const showDate = document.getElementById('show-date');
-  showDate.innerText = timeToday
-}
-
-getBitcoinFunction()
+    // Show time
+    let timeToday = new Date;
+    // const timeToday = data[0].price_date;
+    const showDate = document.getElementById('show-date');
+    showDate.innerText = timeToday
+  }
+  getBitcoinFunction()
+}, 2000)
 
 // Convert from btc to currency
 
@@ -27,7 +28,7 @@ getBitcoinFunction()
 const access_key = 'VGNS7gpTo6o7errodHafToXucwtUhL6p';
 const from = 'USD';
 const to = 'NGN';
-const amount = bitCoinPrice;
+const amount = 25;
 
 const myHeaders = new Headers();
 myHeaders.append("apikey", "VGNS7gpTo6o7errodHafToXucwtUhL6p");
