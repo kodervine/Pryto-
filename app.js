@@ -1,22 +1,25 @@
 // const bitCoinData = "https://api.cryptonator.com/api/ticker/btc-usd";
 const bitCoinData = "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1";
 
-let fetchedCryptoRequest;
+// Use async to fetch the bitcoin data
+async function getBitcoinFunction(){
+  const fetchData = await fetch(bitCoinData)
+  const data = await fetchData.json()
 
-fetch(bitCoinData)
-  .then(response => response.json())
-  .then(data => fetchedCryptoRequest = data)
-
-setTimeout(()=>{
-  const accessCryptoAPIData = fetchedCryptoRequest[0].price
-
+  const accessCryptoAPIData = data[0].price
   const roundOffCrptoData = Math.round(accessCryptoAPIData)
 
   const bitCoinPrice = document.getElementById('bitcoin-price')
   bitCoinPrice.innerText = roundOffCrptoData
- }, 5000)
 
-console.log(bitCoinData)
+  // Show time
+  let timeToday = new Date;
+  // const timeToday = data[0].price_date;
+  const showDate = document.getElementById('show-date');
+  showDate.innerText = timeToday
+}
+
+getBitcoinFunction()
 
 // Convert from btc to currency
 
@@ -24,7 +27,7 @@ console.log(bitCoinData)
 const access_key = 'VGNS7gpTo6o7errodHafToXucwtUhL6p';
 const from = 'USD';
 const to = 'NGN';
-const amount = 25;
+const amount = bitCoinPrice;
 
 const myHeaders = new Headers();
 myHeaders.append("apikey", "VGNS7gpTo6o7errodHafToXucwtUhL6p");
