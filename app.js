@@ -1,4 +1,11 @@
-const coinsToExchange = 
+// Variables of select and converting the html collection to an array
+const coinsToExchange = document.getElementById('crypto-id').children;
+const coinIdArray = Array.from(coinsToExchange)
+console.log(coinIdArray[2].innerText)
+const selectCryptoId = document.getElementById('crypto-id');
+
+
+// Get bitcoin data from nomic
 const bitCoinData = "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1";
 
 // Use async to fetch the bitcoin data
@@ -18,7 +25,7 @@ setInterval(()=>{
     showDate.innerText = timeToday
   }
   getBitcoinFunction()
-}, 2000)
+}, 1000)
 
 // Convert from btc to currency
 
