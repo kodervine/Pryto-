@@ -1,4 +1,4 @@
-// const bitCoinData = "https://api.cryptonator.com/api/ticker/btc-usd";
+const coinsToExchange = 
 const bitCoinData = "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1";
 
 // Use async to fetch the bitcoin data
@@ -7,11 +7,9 @@ setInterval(()=>{
     const fetchData = await fetch(bitCoinData)
     const data = await fetchData.json()
 
-    const accessCryptoAPIData = data[0].price
-    const roundOffCrptoData = Math.round(accessCryptoAPIData)
-
+    const roundOffCryptoData = Math.round(data[0].price)
     const bitCoinPrice = document.getElementById('bitcoin-price')
-    bitCoinPrice.innerText = roundOffCrptoData
+    bitCoinPrice.innerText = roundOffCryptoData
 
     // Show time
     let timeToday = new Date;
