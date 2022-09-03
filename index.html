@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/logo-image.png" type="image/icon type" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="/app.js" defer></script>
+    <title>| Pryto |</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="/app.js" defer></script>
-  <title>| Pryto | </title>
-</head>
+  <body>
+    <header class="header">
+      <!-- <img src="/images/logo-image.png" alt=""> -->
+      <h1>Pryto</h1>
+      <p>Get the most current cryptocurrency price in naira</p>
+    </header>
 
-<body>
-  <header class="header">
-    <h1>Pryto</h1>
-    <p>Get the most current cryptocurrency price in naira</p>
-  </header>
+    <main class="main-body">
+      <h3>Current Time</h3>
+      <p id="show-date"></p>
+      <!-- Circle to display the bitcoin -->
+      <div class="price-circle">
+        <p>Type amount</p>
+        <input type="number" name="" id="input-coin" value="1" />
+        <select name="crypto-id" id="crypto-id">
+          <option value="">Choose Coin</option>
+          <option value="ETH">BTC</option>
+          <option value="ETH" selected>ETH</option>
+          <option value="ETH">BNB</option>
+          <option value="ETH">DOGE</option>
+          <option value="ETH">ZEC</option>
+        </select>
+      </div>
 
-  <main class="main-body">
-    <h3>Current Time</h3>
-    <p id="show-date"></p>
-<!-- Circle to display the bitcoin -->
-    <div class="price-circle">
-      <select name="crypto-id" id="crypto-id">
-        <option value="">Choose Coin</option>
-        <option value="ETH">BTC</option>
-        <option value="ETH">ETH</option>
-        <option value="ETH">BNB</option>
-        <option value="ETH">DOGE</option>
-        <option value="ETH">ZEC</option>
-      </select>
-      <p>Etherum price now</p>
-      <p id="bitcoin-price">00:00</p>
-    </div>
-
-    <!-- Price  -->
-    <section class="currency-price">
-        <p id="usd-id">Usd : </p>
-        <p id="naira-id">Naira : </p>     
-    </section>
-  </main>
-</body>
-
+      <!-- Price  -->
+      <section class="currency-price-container">
+        <div>
+          <p>USD Price</p>
+          <p id="usd-id" class="currency-price">Usd :</p>
+        </div>
+        <div>
+          <p>Naira price</p>
+          <p id="naira-id" class="currency-price">Naira :</p>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
