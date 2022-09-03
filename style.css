@@ -76,6 +76,7 @@ body {
 .currency-price-container {
   display: flex;
   gap: 20px;
+  text-align: center;
 }
 
 .currency-price {
