@@ -7,7 +7,9 @@
 }
 
 :root {
-  --primary-bg-color: rgb(24, 20, 54);
+  --primary-bg-color: rgb(27, 21, 69);
+  --primary-red-color: darkred;
+  --primary-green-color: darkgreen;
 }
 
 body {
@@ -15,12 +17,19 @@ body {
   margin: auto;
   background-color: white;
   border: 1px solid var(--primary-bg-color);
+  color: var(--primary-bg-color);
   font-family: "Bree Serif", serif;
 }
 
 .header {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header div {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -54,7 +63,7 @@ body {
 }
 
 #crypto-id {
-  border: 2px solid rgb(44, 44, 44);
+  border: 2px solid var(--primary-bg-color);
   outline: none;
   border-radius: 4px;
   height: 40px;
@@ -67,6 +76,7 @@ body {
   font-size: 40px;
   border: none;
   border-bottom: 1px solid var(--primary-bg-color);
+  color: var(--primary-bg-color);
   cursor: pointer;
   font-weight: 500;
   font-family: "Bree Serif", serif;
@@ -87,6 +97,16 @@ body {
   border-radius: 10px;
   font-size: 20px;
   cursor: copy;
+}
+
+.usd-price {
+  color: var(--primary-red-color);
+  font-size: 20px;
+}
+
+.naira-price {
+  color: var(--primary-green-color);
+  font-size: 20px;
 }
 
 @media (max-width: 798px) {

@@ -12,9 +12,11 @@
 
   <body>
     <header class="header">
-      <!-- <img src="/images/logo-image.png" alt=""> -->
-      <h1>Pryto</h1>
-      <p>Get the most current cryptocurrency price in naira</p>
+      <div>
+        <img src="/images/logo-image.png" alt="" />
+        <h1>Pryto</h1>
+      </div>
+      <p>See the live cryptocurrency price in naira</p>
     </header>
 
     <main class="main-body">
@@ -37,12 +39,12 @@
       <!-- Price  -->
       <section class="currency-price-container">
         <div>
-          <p>USD Price</p>
-          <p id="usd-id" class="currency-price">Usd :</p>
+          <p class="usd-price">USD Price</p>
+          <p id="usd-id" class="currency-price">--</p>
         </div>
         <div>
-          <p>Naira price</p>
-          <p id="naira-id" class="currency-price">Naira :</p>
+          <p class="naira-price">Naira price</p>
+          <p id="naira-id" class="currency-price">--</p>
         </div>
       </section>
     </main>
