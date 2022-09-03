@@ -16,7 +16,11 @@ body {
   width: 40%;
   margin: auto;
   background-color: white;
-  border: 1px solid var(--primary-bg-color);
+  border: 6px solid var(--primary-bg-color);
+  border-style: double;
+  border-top: none;
+  border-bottom: none;
+  border-radius: 5%;
   color: var(--primary-bg-color);
   font-family: "Bree Serif", serif;
 }
