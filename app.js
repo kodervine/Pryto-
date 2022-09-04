@@ -3,15 +3,17 @@
 // Dynamically select any of the coin names
 const coinsNameDropdown = document.getElementById("crypto-id");
 
-coinsNameDropdown.addEventListener("change", () => {
-  const coinName =
-    coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
-  console.log(coinName);
-});
+// coinsNameDropdown.addEventListener("change", () => {
+//   const coinName =
+//     coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
+//   console.log(coinName);
 
-// const coinsToExchange = document.getElementById("crypto-id").children;
-// const coinIdArray = Array.from(coinsToExchange);
-// console.log(coinIdArray[2].innerText);
+//   for (data in fetchedData) {
+//     if (coinName.toLowerCase === data){
+//       console.log(data)
+//     }
+//   }
+// });
 
 const selectCryptoId = document.getElementById("crypto-id");
 
@@ -42,8 +44,38 @@ async function getBitcoinFunction() {
     fetchedData = await fetchData.json();
     console.log(fetchedData.rates);
 
+    // Select dropdown menu coin name
+    coinsNameDropdown.addEventListener("change", () => {
+      const coinName =
+        coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
+      console.log(coinName);
+
+      // Loop for the dropdown menu
+      for (let data in fetchedData.rates) {
+        if (coinName.toLowerCase() === data) {
+          const coinValue = fetchedData.rates[data].value;
+          console.log(coinValue);
+
+          // ====== Do the mathematics for the coins here
+          console.log(dollarAmount / coinValue);
+        }
+        console.log(fetchedData.rates[data].type);
+
+        // Add to options on screen
+        const createCryptoDropDownOption = document.createElement("option");
+        if (fetchedData.rates[data].type === "crypto") {
+          createCryptoDropDownOption.value = data.toUpperCase();
+          createCryptoDropDownOption.innerText = data.toUpperCase();
+          coinsNameDropdown.appendChild(createCryptoDropDownOption);
+        }
+      }
+
+      console.log(coinName.toLowerCase());
+    });
+
     // Amount in dollars
     const dollarAmount = Math.round(fetchedData.rates.usd.value);
+    console.log(dollarAmount);
 
     const nairaAmount = Math.round(fetchedData.rates.ngn.value);
 
@@ -64,16 +96,6 @@ async function getBitcoinFunction() {
     usdId.innerText = `$${multiplyInnerDollarText}`;
   }
   getExchangeCurrency();
-
-  //===============================
-  // Calculate different coin prices
-  // function convertCurrency(coinname, selectedCoin, usd) {
-  //   const getValueOfCoin = document.getElementById("input-coin").value;
-
-  //   const fetchedCoinValue = fetchedData.rates.coinname.value;
-  //   const ethPrice = usd / fetchedCoinValue;
-  //   console.log(fetchedData);
-  // }
 }
 getBitcoinFunction();
 // }, 5000);
