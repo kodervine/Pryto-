@@ -1,8 +1,17 @@
 // Variables of select and converting the html collection to an array
 
-const coinsToExchange = document.getElementById("crypto-id").children;
-const coinIdArray = Array.from(coinsToExchange);
-console.log(coinIdArray[2].innerText);
+// Dynamically select any of the coin names
+const coinsNameDropdown = document.getElementById("crypto-id");
+
+coinsNameDropdown.addEventListener("change", () => {
+  const coinName =
+    coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
+  console.log(coinName);
+});
+
+// const coinsToExchange = document.getElementById("crypto-id").children;
+// const coinIdArray = Array.from(coinsToExchange);
+// console.log(coinIdArray[2].innerText);
 
 const selectCryptoId = document.getElementById("crypto-id");
 
@@ -12,49 +21,59 @@ const bitCoinData =
 
 // Use async to fetch the bitcoin data
 
-setInterval(() => {
-  async function getBitcoinFunction() {
-    const fetchData = await fetch(bitCoinData);
-    const data = await fetchData.json();
+// setInterval(() => {
+async function getBitcoinFunction() {
+  const fetchData = await fetch(bitCoinData);
+  const data = await fetchData.json();
 
-    const roundOffCryptoData = Math.round(data[0].price);
+  const roundOffCryptoData = Math.round(data[0].price);
 
-    // Show time
-    let timeToday = new Date();
-    const showDate = document.getElementById("show-date");
-    showDate.innerText = timeToday;
+  // Show time
+  let timeToday = new Date();
+  const showDate = document.getElementById("show-date");
+  showDate.innerText = timeToday;
 
-    // Variable to append fetched conversion data to
-    let fetchedData = {};
-    async function getExchangeCurrency() {
-      const fetchData = await fetch(
-        "https://api.coingecko.com/api/v3/exchange_rates"
-      );
-      fetchedData = await fetchData.json();
-      console.log(fetchedData.rates.eth);
+  // Variable to append fetched conversion data to
+  let fetchedData = {};
+  async function getExchangeCurrency() {
+    const fetchData = await fetch(
+      "https://api.coingecko.com/api/v3/exchange_rates"
+    );
+    fetchedData = await fetchData.json();
+    console.log(fetchedData.rates);
 
-      // Amount in dollars
-      const dollarAmount = Math.round(fetchedData.rates.usd.value);
+    // Amount in dollars
+    const dollarAmount = Math.round(fetchedData.rates.usd.value);
 
-      const nairaAmount = Math.round(fetchedData.rates.ngn.value);
+    const nairaAmount = Math.round(fetchedData.rates.ngn.value);
 
-      // Input of numbers to be multiplied by
-      const getValueOfCoin = document.getElementById("input-coin").value;
+    // Input of numbers to be multiplied by
+    const getValueOfCoin = document.getElementById("input-coin").value;
 
-      // Multiply with the value from the number input
-      const multiplyInnerNairaText = nairaAmount * parseInt(getValueOfCoin);
+    // Multiply with the value from the number input
+    const multiplyInnerNairaText = nairaAmount * parseInt(getValueOfCoin);
 
-      const multiplyInnerDollarText = dollarAmount * parseInt(getValueOfCoin);
-      console.log(multiplyInnerNairaText);
+    const multiplyInnerDollarText = dollarAmount * parseInt(getValueOfCoin);
+    console.log(multiplyInnerNairaText);
 
-      // Add money value to the DOM
-      const nairaId = document.getElementById("naira-id");
-      const usdId = document.getElementById("usd-id");
+    // Add money value to the DOM
+    const nairaId = document.getElementById("naira-id");
+    const usdId = document.getElementById("usd-id");
 
-      nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
-      usdId.innerText = `$${multiplyInnerDollarText}`;
-    }
-    getExchangeCurrency();
+    nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
+    usdId.innerText = `$${multiplyInnerDollarText}`;
   }
-  getBitcoinFunction();
-}, 10000);
+  getExchangeCurrency();
+
+  //===============================
+  // Calculate different coin prices
+  // function convertCurrency(coinname, selectedCoin, usd) {
+  //   const getValueOfCoin = document.getElementById("input-coin").value;
+
+  //   const fetchedCoinValue = fetchedData.rates.coinname.value;
+  //   const ethPrice = usd / fetchedCoinValue;
+  //   console.log(fetchedData);
+  // }
+}
+getBitcoinFunction();
+// }, 5000);
