@@ -44,29 +44,34 @@ async function getBitcoinFunction() {
     fetchedData = await fetchData.json();
     console.log(fetchedData.rates);
 
-    // Select dropdown menu coin name
+    // Select dropdown menu coin name in order to get innerText to compare with the fetch API currency symbol
     coinsNameDropdown.addEventListener("change", () => {
       const coinName =
         coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
       console.log(coinName);
 
-      // Loop for the dropdown menu
+      // Loop for the dropdown menu, which will use the selected dropdown coin  Name, to get its monetary value dynamically
       for (let data in fetchedData.rates) {
         if (coinName.toLowerCase() === data) {
           const coinValue = fetchedData.rates[data].value;
           console.log(coinValue);
 
           // ====== Do the mathematics for the coins here
+
+          const everyAmount = Math.round(fetchedData.rates[data].value);
+          console.log(everyAmount);
+
           console.log(dollarAmount / coinValue);
         }
-        console.log(fetchedData.rates[data].type);
+        // console.log(fetchedData.rates[data].type);
 
-        // Add to options on screen
-        const createCryptoDropDownOption = document.createElement("option");
+        // Add the newly created options from the bitCoin API on the html screen
+        const createCryptoDropdownOption = document.createElement("option");
         if (fetchedData.rates[data].type === "crypto") {
-          createCryptoDropDownOption.value = data.toUpperCase();
-          createCryptoDropDownOption.innerText = data.toUpperCase();
-          coinsNameDropdown.appendChild(createCryptoDropDownOption);
+          createCryptoDropdownOption.value = data.toUpperCase();
+          createCryptoDropdownOption.innerText = data.toUpperCase();
+
+          coinsNameDropdown.appendChild(createCryptoDropdownOption);
         }
       }
 
@@ -75,7 +80,6 @@ async function getBitcoinFunction() {
 
     // Amount in dollars
     const dollarAmount = Math.round(fetchedData.rates.usd.value);
-    console.log(dollarAmount);
 
     const nairaAmount = Math.round(fetchedData.rates.ngn.value);
 
@@ -86,7 +90,6 @@ async function getBitcoinFunction() {
     const multiplyInnerNairaText = nairaAmount * parseInt(getValueOfCoin);
 
     const multiplyInnerDollarText = dollarAmount * parseInt(getValueOfCoin);
-    console.log(multiplyInnerNairaText);
 
     // Add money value to the DOM
     const nairaId = document.getElementById("naira-id");
