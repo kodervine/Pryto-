@@ -1,19 +1,5 @@
-// Variables of select and converting the html collection to an array
-
 // Dynamically select any of the coin names
 const coinsNameDropdown = document.getElementById("crypto-id");
-
-// coinsNameDropdown.addEventListener("change", () => {
-//   const coinName =
-//     coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
-//   console.log(coinName);
-
-//   for (data in fetchedData) {
-//     if (coinName.toLowerCase === data){
-//       console.log(data)
-//     }
-//   }
-// });
 
 const selectCryptoId = document.getElementById("crypto-id");
 
@@ -25,8 +11,8 @@ const bitCoinData =
 
 // setInterval(() => {
 async function getBitcoinFunction() {
-  const fetchData = await fetch(bitCoinData);
-  const data = await fetchData.json();
+  const fetchBitcoinData = await fetch(bitCoinData);
+  const data = await fetchBitcoinData.json();
 
   const roundOffCryptoData = Math.round(data[0].price);
 
@@ -50,6 +36,11 @@ async function getBitcoinFunction() {
         coinsNameDropdown.options[coinsNameDropdown.selectedIndex].innerText;
       console.log(coinName);
 
+      //Static Money value in dollars and naira - to calculate with and divide others with
+      const dollarAmount = fetchedData.rates.usd.value;
+
+      const nairaAmount = fetchedData.rates.ngn.value;
+
       // Loop for the dropdown menu, which will use the selected dropdown coin  Name, to get its monetary value dynamically
       for (let data in fetchedData.rates) {
         if (coinName.toLowerCase() === data) {
@@ -57,13 +48,35 @@ async function getBitcoinFunction() {
           console.log(coinValue);
 
           // ====== Do the mathematics for the coins here
+          const eachAmount = Math.round(fetchedData.rates[data].value);
+          console.log(eachAmount);
 
-          const everyAmount = Math.round(fetchedData.rates[data].value);
-          console.log(everyAmount);
+          let newUSDValue;
+          if (dollarAmount / coinValue < 1) {
+            newUSDValue = Math.round((dollarAmount / coinValue) * 100) / 100;
+          } else {
+            newUSDValue = Math.round(dollarAmount / coinValue);
+          }
 
-          console.log(dollarAmount / coinValue);
+          const newNairaValue = Math.round(nairaAmount / coinValue);
+          console.log(newUSDValue);
+
+          // Get Input of numbers to be multiplied by from the DOM
+          const getValueOfCoin = document.getElementById("input-coin").value;
+
+          // Multiply with the value from the number input
+          const multiplyInnerNairaText =
+            newNairaValue * parseInt(getValueOfCoin);
+
+          const multiplyInnerDollarText =
+            newUSDValue * parseInt(getValueOfCoin);
+
+          const nairaId = document.getElementById("naira-id");
+          const usdId = document.getElementById("usd-id");
+
+          nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
+          usdId.innerText = `$${multiplyInnerDollarText}`;
         }
-        // console.log(fetchedData.rates[data].type);
 
         // Add the newly created options from the bitCoin API on the html screen
         const createCryptoDropdownOption = document.createElement("option");
@@ -74,31 +87,9 @@ async function getBitcoinFunction() {
           coinsNameDropdown.appendChild(createCryptoDropdownOption);
         }
       }
-
-      console.log(coinName.toLowerCase());
     });
-
-    // Amount in dollars
-    const dollarAmount = Math.round(fetchedData.rates.usd.value);
-
-    const nairaAmount = Math.round(fetchedData.rates.ngn.value);
-
-    // Input of numbers to be multiplied by
-    const getValueOfCoin = document.getElementById("input-coin").value;
-
-    // Multiply with the value from the number input
-    const multiplyInnerNairaText = nairaAmount * parseInt(getValueOfCoin);
-
-    const multiplyInnerDollarText = dollarAmount * parseInt(getValueOfCoin);
-
-    // Add money value to the DOM
-    const nairaId = document.getElementById("naira-id");
-    const usdId = document.getElementById("usd-id");
-
-    nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
-    usdId.innerText = `$${multiplyInnerDollarText}`;
   }
   getExchangeCurrency();
 }
 getBitcoinFunction();
-// }, 5000);
+// }, 1000);
