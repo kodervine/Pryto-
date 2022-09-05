@@ -3,12 +3,11 @@ const coinsNameDropdown = document.getElementById("crypto-id");
 
 const selectCryptoId = document.getElementById("crypto-id");
 
-// Get bitcoin data from nomic
+// Get bitcoin data from nomic API
 const bitCoinData =
   "https://api.nomics.com/v1/currencies/ticker?key=23ac2761382825f70678666ea03f9ccdafe7bed4&ids=BTC,ETH,XRP&interval=1d,30d&convert=USD&platform-currency=ETH&per-page=100&page=1";
 
 // Use async to fetch the bitcoin data
-
 // setInterval(() => {
 async function getBitcoinFunction() {
   const fetchBitcoinData = await fetch(bitCoinData);
@@ -17,9 +16,11 @@ async function getBitcoinFunction() {
   const roundOffCryptoData = Math.round(data[0].price);
 
   // Show time
-  let timeToday = new Date();
-  const showDate = document.getElementById("show-date");
-  showDate.innerText = timeToday;
+  setInterval(() => {
+    let timeToday = new Date();
+    const showDate = document.getElementById("show-date");
+    showDate.innerText = timeToday;
+  });
 
   // Variable to append fetched conversion data to
   let fetchedData = {};
