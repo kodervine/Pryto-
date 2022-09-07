@@ -82,7 +82,30 @@ async function getBitcoinFunction() {
         // Add the newly created options from the bitCoin API on the html screen
         const createCryptoDropdownOption = document.createElement("option");
         if (fetchedData.rates[data].type === "crypto") {
-          createCryptoDropdownOption.value = data.toUpperCase();
+          // // Stop duplication
+          // const stopAddingCoinValue = Array.from(coinsNameDropdown.children);
+
+          // const arrayToCheck = [];
+          // for (let value of stopAddingCoinValue) {
+          //   arrayToCheck.push(value.innerText);
+          //   console.log(arrayToCheck);
+          //   for (let item of arrayToCheck) {
+          //     if (item === data.toUpperCase()) {
+          //       return;
+          //     } else {
+          //       createCryptoDropdownOption.value = data.toUpperCase();
+          //       createCryptoDropdownOption.innerText = data.toUpperCase();
+          //     }
+          //   }
+          // }
+
+          // do {
+          //   createCryptoDropdownOption.value = data.toUpperCase();
+          //   createCryptoDropdownOption.innerText = data.toUpperCase();
+          // } while (value.innerText === data.toUpperCase());
+
+          if (coinsNameDropdown.children)
+            createCryptoDropdownOption.value = data.toUpperCase();
           createCryptoDropdownOption.innerText = data.toUpperCase();
 
           coinsNameDropdown.appendChild(createCryptoDropdownOption);

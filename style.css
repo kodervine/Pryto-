@@ -114,6 +114,11 @@ body {
   font-size: 20px;
 }
 
+footer {
+  text-align: center;
+  font-size: 14px;
+}
+
 @media (max-width: 798px) {
   body {
     width: 90%;
