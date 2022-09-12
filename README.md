@@ -20,8 +20,10 @@ So I created a new variable = **_newUSDValue, newNairaValue_** so that when I ge
 
 In this case, I needed to have 2 logic in place for the "getValueOfNumber". This is the amount of the units a person wants to know the crypto current rates
 
-1. To use parseInt when the amount from the input is 1 and above
-2. To use parseFloat when the amount is less than 1
+1. To use parseInt when the amount from the input doesn't have decimal point
+2. To use parseFloat when the amount contains any decimal point
+
+So, i used the new ES6 logic (Number.isInterger) to make the logic work
 
 Then I set a new variable for the mathematics
 

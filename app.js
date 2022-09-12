@@ -80,12 +80,12 @@ async function getBitcoinFunction() {
           const nairaId = document.getElementById("naira-id");
           const usdId = document.getElementById("usd-id");
 
-          if (getValueOfCoin < 1) {
-            nairaId.innerText = `${fetchedData.rates.ngn.unit} ${divideInnerNairaText}`;
-            usdId.innerText = `$${divideInnerDollarText}`;
-          } else {
+          if (Number.isInteger(getValueOfCoin)) {
             nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
             usdId.innerText = `$${multiplyInnerDollarText}`;
+          } else {
+            nairaId.innerText = `${fetchedData.rates.ngn.unit} ${divideInnerNairaText}`;
+            usdId.innerText = `$${divideInnerDollarText}`;
           }
         }
 
