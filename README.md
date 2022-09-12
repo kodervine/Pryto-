@@ -18,6 +18,11 @@ Then, I saved this to a new variable for future mathematical purposes - const **
 
 So I created a new variable = **_newUSDValue, newNairaValue_** so that when I get the value of each coin, it will be used to be divided by the dollar amount and naira amount and displayed on the screen
 
+In this case, I needed to have 2 logic in place for the "getValueOfNumber". This is the amount of the units a person wants to know the crypto current rates
+
+1. To use parseInt when the amount from the input is 1 and above
+2. To use parseFloat when the amount is less than 1
+
 Then I set a new variable for the mathematics
 
 For the USD, I created a conditional to confirm if the coinValue is less than 1, it will round it off to 2 decimals. Else, it rounds it off to the nearest whole number

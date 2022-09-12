@@ -60,54 +60,44 @@ async function getBitcoinFunction() {
           }
 
           const newNairaValue = Math.round(nairaAmount / coinValue);
-          console.log(newUSDValue);
 
           // Get Input of numbers to be multiplied by from the DOM
           const getValueOfCoin = document.getElementById("input-coin").value;
 
-          // Multiply with the value from the number input
+          // Multiply with the value from the number input, ensure the decimal and whole number is working
           const multiplyInnerNairaText =
             newNairaValue * parseInt(getValueOfCoin);
-
           const multiplyInnerDollarText =
             newUSDValue * parseInt(getValueOfCoin);
+
+          const divideInnerNairaText = Math.round(
+            newNairaValue * parseFloat(getValueOfCoin)
+          );
+          const divideInnerDollarText = Math.round(
+            newUSDValue * parseFloat(getValueOfCoin)
+          );
 
           const nairaId = document.getElementById("naira-id");
           const usdId = document.getElementById("usd-id");
 
-          nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
-          usdId.innerText = `$${multiplyInnerDollarText}`;
+          if (getValueOfCoin < 1) {
+            nairaId.innerText = `${fetchedData.rates.ngn.unit} ${divideInnerNairaText}`;
+            usdId.innerText = `$${divideInnerDollarText}`;
+          } else {
+            nairaId.innerText = `${fetchedData.rates.ngn.unit} ${multiplyInnerNairaText}`;
+            usdId.innerText = `$${multiplyInnerDollarText}`;
+          }
         }
 
         // Add the newly created options from the bitCoin API on the html screen
         const createCryptoDropdownOption = document.createElement("option");
         if (fetchedData.rates[data].type === "crypto") {
-          // // Stop duplication
-          // const stopAddingCoinValue = Array.from(coinsNameDropdown.children);
-
-          // const arrayToCheck = [];
-          // for (let value of stopAddingCoinValue) {
-          //   arrayToCheck.push(value.innerText);
-          //   console.log(arrayToCheck);
-          //   for (let item of arrayToCheck) {
-          //     if (item === data.toUpperCase()) {
-          //       return;
-          //     } else {
-          //       createCryptoDropdownOption.value = data.toUpperCase();
-          //       createCryptoDropdownOption.innerText = data.toUpperCase();
-          //     }
-          //   }
-          // }
-
-          // do {
-          //   createCryptoDropdownOption.value = data.toUpperCase();
-          //   createCryptoDropdownOption.innerText = data.toUpperCase();
-          // } while (value.innerText === data.toUpperCase());
-
-          if (coinsNameDropdown.children)
-            createCryptoDropdownOption.value = data.toUpperCase();
+          createCryptoDropdownOption.value = data.toUpperCase();
           createCryptoDropdownOption.innerText = data.toUpperCase();
 
+          const newArray = Array.from(coinsNameDropdown.children);
+          const setForArray = new Set(newArray);
+          console.log(newArray);
           coinsNameDropdown.appendChild(createCryptoDropdownOption);
         }
       }
