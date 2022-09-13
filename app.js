@@ -95,9 +95,15 @@ async function getBitcoinFunction() {
           createCryptoDropdownOption.value = data.toUpperCase();
           createCryptoDropdownOption.innerText = data.toUpperCase();
 
-          const newArray = Array.from(coinsNameDropdown.children);
-          const setForArray = new Set(newArray);
-          console.log(newArray);
+          // const newArray = Array.from(coinsNameDropdown.children);
+          // console.log(newArray);
+
+          // const setForArray = new Set();
+          // console.log(setForArray);
+          // for (let arr of newArray) {
+          //   setForArray.add(arr);
+          // }
+          // console.log(setForArray);
           coinsNameDropdown.appendChild(createCryptoDropdownOption);
         }
       }
